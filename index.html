@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body ng-app="directoryApp" style="background-color:#E8F8F5;">
+    <div class="container-fluid">
+      <div class="row" style="text-align: center">
+        <h1>UF Directory App</h1>
+      </div>
+
+
+        </div>
+
+<br>
+      <div class="container-fluid">
+      <div class="row" ng-controller="ListingsController" data-ng-init = "searchListing(input)">
+        
+        
+            <div class="tableWrapper">
+
+            <table class="table table-striped table-hover ">
+            <thead>
+            <tr >
+             <th>Code</th>
+             <th>Building Name</th>
+             </tr>
+            </thead>
+                <tr ng-repeat="listing in listings | filter: input"  ng-click="showDetails($index)">
+              	<th>
+              	<div id="codeBuilding" >
+              	 {{listing.code}}
+              	</div>
+              	</th>
+
+              	<th>
+              	<div id="codeName" >
+              	 {{listing.name}}
+              	</div>
+              	</th>
+             	<th>
+             	<button type="button" class="btn btn-danger" ng-click="deleteListing(listing) "><span class="glyphicon glyphicon-trash"></span></button >
+             	</th>
+              </tr>
+              <!-- 
+                  Fill in the rest of the table:
+                      * populate the rows with the code and name of each listing
+                      * include a way to remove individual listings
+                --> 
+            </table>
+          </div>
+          <!-- 
+
+            Write an HTML form that adds new listings to the directory 
+          -->
+        
+
+       
+          <div id="detailInfo" class="container-fluid" style="background-color:transparent; ;text-align: center">
+            <h3>Detailed Information</h3>
+            <!-- 	
+              Include a way to display detailed information about an individual listing:
+                   * consider how to use ng-click within the the table to implement this feature
+             -->
+             <p>Name: {{details.name}}</p>
+             <p>Code: {{details.code}}</p>
+             <p>Address: {{details.address}}</p> 
+             <p>Latitude: {{details.coordinates.latitude}}</p>
+             <p>Longitude: {{details.coordinates.longitude}}</p>
+          </div>
+                <br>
+         <div id="addListing" class="col-sm-6 col-md-6 col-lg-7">
+          
+      <form id="reset" name="Add Information" ng-submit="addListings()">
+      <input id="inputBox" type="text" size="40" placeholder="Building Code" ng-model="listings.buildingCode" required="">
+      <input id="inputBox" type="text" size="40" placeholder="Building Name" ng-model="listings.buildingName" required="">
+      <input id="inputBox" type="text" size="40" placeholder="Building Address" ng-model="listings.buildingAddress">
+      <br>
+      <input id="inputBox" type="text" size="40" placeholder="Building Longitude" ng-model="listings.buildingLongitude">
+      <input id="inputBox" type="text" size="40" placeholder="Building Latitude" ng-model="listings.buildingLatitude">
+      <br>
+      <input class="fsSubmitButton" type="submit" value="ADD">
+
+      </form>
+      </div>
+    
+           <div class="col-sm-6 col-md-6 col-lg-5">
+            <div class="input-group" id="searchBar">
+            <!-- 
+        
+                Implement a way to filter through listings using the search bar 
+                //ng-change= "searchListing(input)"
+              -->
+          
+            <input type="text" class="form-control" placeholder="Search" ng-model ="input" ng-change= "searchListing(input)" >
+             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            </div>
+           
+        </div>
+
+      
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="listingController.js"></script>
+    <script src="listingFactory.js"></script>
+  </body>
+</html>
